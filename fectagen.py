@@ -1,11 +1,23 @@
 #!/usr/bin/env python
 # trifecta generator
 import itertools
-outfile = open('trifecta_chart.html', 'w')
-racers = range(1, 9, 1)
-fecta = 3
-chart_cols = 8
-chart_rows = 10
+import argparse
+parser = argparse.ArgumentParser(description='Generate an Xfecta sheet for betting on the order of multiple outcomes.')
+parser.add_argument('-o', '--file', dest='file')
+parser.add_argument('-r', '--racers', dest='racers', help='How many elements to choose from')
+parser.add_argument('-x', '--fecta-factor', dest='fecta', help='How many choices to make in each permutation.')
+parser.add_argument('-c', '--cols', dest='chart_cols', default=8)
+parser.add_argument('-R', '--rows', dest='chart_rows', default=10)
+parser.add_argument('-b', '--breaks', dest='breaks', default=True)
+parser.add_argument('-p', '--paper', dest='paper', choices=['U', 'A'], default='U', help='Choose between US Letter and 8A page formatting.')
+parser.add_argument('-t', '--first-ticket', dest='ticket', help='First ticket serial number.', default=00001)
+args = parser.parse_args([1:])
+
+outfile = open(args.file, 'w')
+racers = range(1, args.racers, 1)
+fecta = args.fecta
+chart_cols = args.chart_cols
+chart_rows = args.chart_rows
 trifecta_iterator = itertools.permutations(tuple(racers), fecta)
 tri = list(trifecta_iterator)
 tricellcount = len(tri) + 1
