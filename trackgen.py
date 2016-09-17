@@ -1,4 +1,4 @@
-#!/user/bin/env python
+#!/user/bin/python
 import random
 
 # RoboRally track tiles (2-sided, 4 tiles)
